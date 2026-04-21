@@ -92,6 +92,23 @@ public class Server {
         }
     }
 
+    private int countFactors(int n) {
+        int count = 0; 
+        // checking only until square root to prevent double counting 
+        for(int i = 1; (long) i * i <= n; i++) {
+            if(n % i == 0) {
+                // if it is a perfect square count the factor only once 
+                if((long) i * i == n) {
+                    count += 1; 
+                } else {
+                    count += 2; 
+                }
+            }
+        }
+
+        return count; 
+    }
+
     public void disconnect() {
         try {
             if(serverSocket != null && !serverSocket.isClosed()) {
