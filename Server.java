@@ -51,15 +51,6 @@ public class Server {
                 e.printStackTrace();
             }
         }
-
-        // waits for all client threads to finish 
-        for(Thread t : threads) {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
     }
 
     // handles one client after each successful handshake 
@@ -107,6 +98,17 @@ public class Server {
         }
 
         return count; 
+    }
+
+    public ArrayList<LocalDateTime> getConnectedTimes() {
+        ArrayList<LocalDateTime> copy; 
+        
+        synchronized (connectedTimes) {
+            copy = new ArrayList<>(connectedTimes);
+        }
+
+        Collections.sort(copy);
+        return copy;
     }
 
     public void disconnect() {
