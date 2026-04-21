@@ -28,7 +28,7 @@ public class Client {
         return in.readLine();
     }
 
-    public void disconnect () throws IOException {
+    public void disconnect() throws IOException {
         if(in != null) {
             in.close(); 
         } 
